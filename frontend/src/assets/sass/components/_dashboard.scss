@@ -1,0 +1,28 @@
+.dashboard {
+  display: block;
+}
+
+.dashboard__container {
+  padding: 50px 100px;
+  margin: 25px 25px;
+  border-radius: 1rem;
+  background-image: linear-gradient(225deg, #fafafa 0%, #f4f4f4 100%);
+}
+
+.dashboard__content {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  max-width: 1200px;
+  flex-wrap: wrap;
+}
+
+.dashboard__title {
+  text-align: center;
+}
+
+@media screen and (max-width: 1300px) {
+  .dashboard__content {
+    max-width: 800px;
+  }
+}

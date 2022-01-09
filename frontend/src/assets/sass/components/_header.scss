@@ -1,0 +1,16 @@
+.header {
+  box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+}
+
+.header__container {
+  padding: 0px 100px 0px 75px;
+}
+
+.header__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__logo {
+  width: 60px;
+}
