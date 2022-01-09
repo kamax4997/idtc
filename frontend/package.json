@@ -37,8 +37,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./",
     "fix": "eslint --ext .js,.jsx,.ts,.tsx  --fix ./",
-    "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
-    "isready": "yarn format && yarn lint && yarn build"
+    "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'"
   },
   "eslintConfig": {
     "extends": [
