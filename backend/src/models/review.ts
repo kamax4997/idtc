@@ -23,7 +23,7 @@ const averageRatings = (reviews: ReviewDocument[], rating: number) => {
     sum += review.rating;
   });
 
-  return sum / reviews.length;
+  return Math.floor(sum / (reviews.length + 1));
 };
 
 ReviewSchema.pre('save', async function (next) {

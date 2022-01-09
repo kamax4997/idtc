@@ -30,28 +30,12 @@ export default {
         .status(HttpStatus.BAD_REQUEST)
         .json({ error: true, message: errors.array()[0].msg });
 
-    // const { productId, reviewer, content, rating } = req.body;
     const review = new Review({
       ...req.body,
     });
-
-    // Add custom property
-    // review.productId = req.body.productId;
-
-    // product.reviews.push(
-    //   new Review({
-    //     productId,
-    //     reviewer,
-    //     content,
-    //     rating
-    //   })
-    // );
     await review.save();
-    // await product.save();
-    // product = await Product.populate(product, {
-    //   path: 'reviews.ratedBy',
-    //   select: 'name',
-    // });
-    res.status(200).json(review);
+
+    const products = await Product.find({});
+    res.status(200).json(products);
   }),
 };

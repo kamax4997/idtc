@@ -43,9 +43,13 @@ const Dashboard: React.FC = () => {
 
   const addReview = (review: IReview) => {
     setTimeout(async () => {
-      const result = await axios.post('/api/v1/reviews', review)
-      if (result) {
+      const response = await axios.post('/api/v1/reviews', review)
+      
+      if (response.data) {
+        setProducts(response.data)
+        setProductsAction(response.data)
         toast.success("LGU created successfully!")
+        toggleReviewModal()
       } else {
         toast.error("Something went wrong!")
       }

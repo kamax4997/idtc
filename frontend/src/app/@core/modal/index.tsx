@@ -30,7 +30,6 @@ const CustomModal: React.FC<ICustomModalProps> = (props: ICustomModalProps) => {
   const [reviewerName, setReviewerName] = useState('')
   const [reviewerContent, setReviewerContent] = useState('')
   const [currentProduct, setCurrentProduct] = useState<IProduct>(products[0])
-
   const [rating, setRating] = React.useState(0)
   
   const handleRating = (rate: number) => {
@@ -61,9 +60,17 @@ const CustomModal: React.FC<ICustomModalProps> = (props: ICustomModalProps) => {
     const results = products.filter((product: IProduct) => {
       return product._id === productId
     })
-    console.log(results)
+    
     setCurrentProduct(results[0])
   }, [setCurrentProduct, productId])
+
+  useEffect(() => {
+    setReviewerName('')
+    setReviewerContent('')
+    setRating(0)
+    setValue('reviewer', '')
+    setValue('content', '')
+  }, [modalOpen])
 
   return (
     <Modal
@@ -88,7 +95,6 @@ const CustomModal: React.FC<ICustomModalProps> = (props: ICustomModalProps) => {
             <input 
               type='hidden'
               value={productId}
-              // {...register('productId', reviewOptions.productId)}
             />
             <div className='product-review__name'>
               <input 
