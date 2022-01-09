@@ -5,7 +5,7 @@ import { IProduct } from 'utils/types/dashboard'
 
 interface IProductProps {
   product: IProduct
-  openReviewModal: (pId: number) => void
+  openReviewModal: (pId: string) => void
 }
 
 const Product: React.FC<IProductProps> = (props: IProductProps) => {
@@ -35,7 +35,7 @@ const Product: React.FC<IProductProps> = (props: IProductProps) => {
         </div>
 
         <div className='product__actions'>
-          <button type='button' onClick={() => openReviewModal(product.id)}>
+          <button type='button' onClick={() => openReviewModal(product._id)}>
             Add Review
           </button>
         </div>

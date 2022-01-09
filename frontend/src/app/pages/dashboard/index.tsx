@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react'
+import { toast } from 'react-hot-toast'
 import Product from 'app/components/product'
 // eslint-disable-next-line
 import { IProduct } from 'utils/types/dashboard'
 import CustomModal from 'app/@core/modal'
+import axios from 'utils/axios/axiosService'
 
 const mockData = [
   {
@@ -51,13 +53,13 @@ const Dashboard: React.FC = () => {
   // const dispatch = useDispatch()
   const [products, setProducts] = useState<IProduct[]>([])
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [productId, setProductId] = useState(1)
+  const [productId, setProductId] = useState('')
 
   const toggleReviewModal = useCallback(() => {
     setModalOpen(!modalOpen)
   }, [modalOpen, setModalOpen])
 
-  const openReviewModal = (pId: number) => {
+  const openReviewModal = (pId: string) => {
     setModalOpen(true)
     setProductId(pId)
   }
@@ -68,28 +70,28 @@ const Dashboard: React.FC = () => {
     products.forEach((product: IProduct) => {
       group.push(
         <Product
-          key={product.id}
+          key={product._id}
           product={product}
-          openReviewModal={(pId: number) => openReviewModal(pId)}
+          openReviewModal={(pId: string) => openReviewModal(pId)}
         />
       )
     })
 
     return group
   }, [products])
-
+  
   useEffect(() => {
-    // switch (selectTab) {
-    //   case 3:
-    //     setElements([categoryMemo1, carouselRecommendMemo])
-    //     break;
-    //   default:
-    //     setElements([categoryMemo1, carouselMemo1])
-    //     break;
-    // }
+    async function getProducts() {
+      try {
+        const response = await axios.get('/api/v1/products')
+        setProducts(response.data.products)
+      } catch (error) {
+        toast.error("Failed to fetch products!")
+      }
+    }
 
-    setProducts(mockData)
-  }, [])
+    getProducts()
+  }, [setProducts])
 
   const reviewModal = useMemo(() => (
     <CustomModal 

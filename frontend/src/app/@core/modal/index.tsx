@@ -3,7 +3,7 @@ import Modal from 'react-modal'
 import { Rating } from 'react-simple-star-rating'
 
 interface ICustomModalProps {
-  productId: number
+  productId: string
   modalOpen: boolean
   toggleReviewModal: () => void
 }
