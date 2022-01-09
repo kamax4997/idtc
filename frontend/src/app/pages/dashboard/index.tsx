@@ -5,6 +5,7 @@ import Product from 'app/components/product'
 import { IProduct } from 'utils/types/dashboard'
 import CustomModal from 'app/@core/modal'
 import axios from 'utils/axios/axiosService'
+import Loading from 'app/@core/loading'
 
 const mockData = [
   {
@@ -54,6 +55,7 @@ const Dashboard: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([])
   const [modalOpen, setModalOpen] = useState<boolean>(false)
   const [productId, setProductId] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const toggleReviewModal = useCallback(() => {
     setModalOpen(!modalOpen)
@@ -81,10 +83,12 @@ const Dashboard: React.FC = () => {
   }, [products])
   
   useEffect(() => {
+    setIsLoading(true)
     async function getProducts() {
       try {
         const response = await axios.get('/api/v1/products')
         setProducts(response.data.products)
+        setIsLoading(false)
       } catch (error) {
         toast.error("Failed to fetch products!")
       }
@@ -109,7 +113,7 @@ const Dashboard: React.FC = () => {
           <p className='dashboard__description'>IDT is a market leader in both retail and wholesale international voice and data services. Leveraging its numerous interconnects with leading Telecom operators globally, IDT has also become a leader in the delivery of airtime and data top-up services to consumers and service providers around the world.</p>
         </div>
         <div className='dashboard__content'>
-          {productsGroup}
+          {isLoading ? <Loading /> : productsGroup}
         </div>
       </div>
       <div className='dashboard__modal'>
