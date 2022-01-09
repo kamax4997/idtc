@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "author": {
+    "name": "Andrei Strukau",
+    "email": "karlikboroda@gmail.com"
+  },
   "scripts": {
     "client": "cd \"frontend\" & yarn start",
     "server": "cd \"backend\" & yarn start",

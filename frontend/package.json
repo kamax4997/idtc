@@ -2,6 +2,9 @@
   "name": "frontend",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "16.13.0"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.1",

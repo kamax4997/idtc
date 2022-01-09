@@ -54,7 +54,8 @@ Inside the project directory run:
 
 ### Scripts for backend
 
-- `yarn start` - runs the app in the development mode. Port is [http://localhost:3001](http://localhost:3001). It will run in the background.
+- `yarn start` - runs the production build app in the `dist` folder.
+- `yarn dev` - runs the app in the development mode. Port is [http://localhost:3001](http://localhost:3001). It will run in the background.
 - `yarn build` - builds the app for production to the `dist` folder.
 - `yarn lint` - lints project files according to Airbnb — as part of their style guide 👍 — it provides an ESLint configuration that anyone can use and it is the standard.
 - `yarn fix` - fix lint errors.
