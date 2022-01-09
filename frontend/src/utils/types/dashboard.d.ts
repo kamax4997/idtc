@@ -9,6 +9,7 @@ export interface IProduct {
 }
 
 export interface IReview {
+  productId: string
   reviewer: string
   content?: string
   rating: number

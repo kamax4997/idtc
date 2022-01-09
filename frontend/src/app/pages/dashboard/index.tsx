@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import { toast } from 'react-hot-toast'
 import Product from 'app/components/product'
 // eslint-disable-next-line
-import { IProduct } from 'utils/types/dashboard'
+import { IProduct, IReview } from 'utils/types/dashboard'
 import CustomModal from 'app/@core/modal'
 import axios from 'utils/axios/axiosService'
 import Loading from 'app/@core/loading'
@@ -53,7 +53,7 @@ const mockData = [
 const Dashboard: React.FC = () => {
   // const dispatch = useDispatch()
   const [products, setProducts] = useState<IProduct[]>([])
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const [productId, setProductId] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -62,6 +62,7 @@ const Dashboard: React.FC = () => {
   }, [modalOpen, setModalOpen])
 
   const openReviewModal = (pId: string) => {
+    console.log("pid", pId)
     setModalOpen(true)
     setProductId(pId)
   }
@@ -81,6 +82,17 @@ const Dashboard: React.FC = () => {
 
     return group
   }, [products])
+
+  const addReview = (review: IReview) => {
+    setTimeout(async () => {
+      const result = await axios.post('/api/v1/reviews', review)
+      if (result) {
+        toast.success("LGU created successfully!")
+      } else {
+        toast.error("Something went wrong!")
+      }
+    }, 1000)
+  }
   
   useEffect(() => {
     setIsLoading(true)
@@ -101,8 +113,9 @@ const Dashboard: React.FC = () => {
     <CustomModal 
       modalOpen={modalOpen} 
       toggleReviewModal={toggleReviewModal}
+      addReview={addReview}
       productId={productId} />
-  ), [modalOpen])
+  ), [modalOpen, productId])
 
   return (
     <div className='dashboard'>
