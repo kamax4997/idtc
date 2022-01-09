@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import ReviewsController from 'controllers/reviewsController';
+import ReviewsController from '../controllers/reviewsController';
 
 router.post('/', ReviewsController.addReview);
 

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import { Product } from 'models/product';
-import { HttpStatus, ErrorStatus } from 'utils/httpStatus';
+import { Product } from '../models/product';
+import { HttpStatus } from '../utils/httpStatus';
 
 export default {
   getProducts: asyncHandler(async (req: Request, res: Response) => {

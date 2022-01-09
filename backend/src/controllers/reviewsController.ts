@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-const { check, oneOf, validationResult } = require('express-validator');
-// import { check, validationResult } from 'express-validator';
-import { Product, ProductDocument } from 'models/product';
-import { Review, ReviewDocument } from 'models/review';
+import { Product, ProductDocument } from '../models/product';
+import { Review } from '../models/review';
 import { isValidObjectId } from 'mongoose';
-import { HttpStatus, ErrorStatus } from 'utils/httpStatus';
+import { HttpStatus, ErrorStatus } from '../utils/httpStatus';
+import { check, validationResult } from 'express-validator';
 
 export default {
   addReview: asyncHandler(async (req: Request, res: Response) => {
