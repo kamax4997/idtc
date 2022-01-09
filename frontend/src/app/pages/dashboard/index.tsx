@@ -6,52 +6,11 @@ import { IProduct, IReview } from 'utils/types/dashboard'
 import CustomModal from 'app/@core/modal'
 import axios from 'utils/axios/axiosService'
 import Loading from 'app/@core/loading'
-
-const mockData = [
-  {
-    id: 1,
-    name: 'Boss Revolution',
-    // eslint-disable-next-line
-    description: 'Enjoy cheap calls to more than 200 countries and send international mobile top-ups to your friends and family back home.',
-    img: 'https://cdn.bossrevolution.com/cms-content/idt_net/images/new/bossrevolutionlogo.svg',
-    overall: 4,
-    link: 'https://bossrevolution.com',
-    reviews: [],
-  },
-  {
-    id: 2,
-    name: 'Boss Wireless',
-    // eslint-disable-next-line
-    description: 'Flexible talk, text, and data plans for big savings. Get the best value on domestic and international calling.',
-    img: 'https://cdn.bossrevolution.com/cms-content/idt_net/images/new/bosswirelesslogo.svg',
-    overall: 5,
-    link: 'https://bosswireless.com',
-    reviews: [],
-  },
-  {
-    id: 3,
-    name: 'Idt Global',
-    // eslint-disable-next-line
-    description: 'Leading provider of international voice and SMS termination and strategic outsource partnerships for fixed and mobile operators globally.',
-    img: 'https://cdn.bossrevolution.com/cms-content/idt_net/images/new/idtgloballogo.svg',
-    overall: 2,
-    link: 'https://idtglobal.com',
-    reviews: [],
-  },
-  {
-    id: 4,
-    name: 'Idt Express',
-    // eslint-disable-next-line
-    description: 'IDT Express is a market leader in global Voice & DIDs servicing UCaaS, CPaaS, CCaaS and other industry segments.',
-    img: 'https://cdn.bossrevolution.com/cms-content/idt_net/images/new/idtexpresslogo.svg',
-    overall: 3,
-    link: 'https://idtexpress.com',
-    reviews: [],
-  },
-]
+import useProducts from 'app/hooks/useProducts'
 
 const Dashboard: React.FC = () => {
-  // const dispatch = useDispatch()
+  const { setProductsAction } = useProducts()
+
   const [products, setProducts] = useState<IProduct[]>([])
   const [modalOpen, setModalOpen] = useState(false)
   const [productId, setProductId] = useState('')
@@ -62,7 +21,6 @@ const Dashboard: React.FC = () => {
   }, [modalOpen, setModalOpen])
 
   const openReviewModal = (pId: string) => {
-    console.log("pid", pId)
     setModalOpen(true)
     setProductId(pId)
   }
@@ -100,6 +58,7 @@ const Dashboard: React.FC = () => {
       try {
         const response = await axios.get('/api/v1/products')
         setProducts(response.data.products)
+        setProductsAction(response.data.products)
         setIsLoading(false)
       } catch (error) {
         toast.error("Failed to fetch products!")

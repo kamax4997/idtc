@@ -5,7 +5,6 @@ export interface IProduct {
   img?: string
   overall: number
   link: string
-  reviews: IReview[]
 }
 
 export interface IReview {

@@ -1,67 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AppDispatch } from 'utils/redux/store'
+// eslint-disable-next-line
+import { IProduct } from 'utils/types/dashboard'
 
 const initialState = {
-  currentUser: {
-    id: '',
-    firstName: '',
-    lastName: '',
-    avatarUrl: '',
-    profile: {
-      id: '',
-      freelancerRate: 0,
-      annualCompensation: 0,
-      availabilityType: [],
-      freelancerType: {
-        id: '',
-        name: '',
-      },
-      totalExperience: 0,
-      textIntroduction: '',
-    },
-    userSkills: [],
-    timezone: '',
-  },
-  contracts: {
-    nodes: [],
-    totalCount: 0,
-  },
+  products: []
 }
 
 const slice = createSlice({
   name: 'dashboard',
   initialState,
   reducers: {
-    // SET GRAPHQL DATA
-    setData(state, action) {
-      state.currentUser = action.payload.currentUser
-      state.contracts = action.payload.contracts
+    setProducts(state, action) {
+      state.products = action.payload.products
     },
-    clearData(state) {
-      state.currentUser = {
-        id: '',
-        firstName: '',
-        lastName: '',
-        avatarUrl: '',
-        profile: {
-          id: '',
-          freelancerRate: 0,
-          annualCompensation: 0,
-          availabilityType: [],
-          freelancerType: {
-            id: '',
-            name: '',
-          },
-          totalExperience: 0,
-          textIntroduction: '',
-        },
-        userSkills: [],
-        timezone: '',
-      }
-      state.contracts = {
-        nodes: [],
-        totalCount: 0,
-      }
+    clearProducts(state) {
+      state.products = []
     },
   },
 })
@@ -69,24 +23,19 @@ const slice = createSlice({
 // Reducer
 export default slice.reducer
 
-// ----------------------------------------------------------------------
-
-// export function setGraphqlData(gData: IGraphql) {
-//   // eslint-disable-next-line
-//   return async (dispatch: AppDispatch) => {
-//     dispatch(slice.actions.setData({
-//       currentUser: gData.currentUser,
-//       contracts: gData.contracts,
-//     }))
-
-//     return true
-//   }
-// }
-
-export function clearGraphqlData() {
-  // eslint-disable-next-line
+export function setProducts(products: IProduct[]) {
   return async (dispatch: AppDispatch) => {
-    dispatch(slice.actions.clearData())
+    dispatch(slice.actions.setProducts({
+      products: products,
+    }))
+
+    return true
+  }
+}
+
+export function clearProducts() {
+  return async (dispatch: AppDispatch) => {
+    dispatch(slice.actions.clearProducts())
     return true
   }
 }

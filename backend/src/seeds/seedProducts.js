@@ -7,7 +7,6 @@ const productsMockData = [
     img: 'https://cdn.bossrevolution.com/cms-content/idt_net/images/new/bossrevolutionlogo.svg',
     overall: 4,
     link: 'https://bossrevolution.com',
-    reviews: [],
   },
   {
     name: 'Boss Wireless',
@@ -15,7 +14,6 @@ const productsMockData = [
     img: 'https://cdn.bossrevolution.com/cms-content/idt_net/images/new/bosswirelesslogo.svg',
     overall: 5,
     link: 'https://bosswireless.com',
-    reviews: [],
   },
   {
     name: 'Idt Global',
@@ -23,7 +21,6 @@ const productsMockData = [
     img: 'https://cdn.bossrevolution.com/cms-content/idt_net/images/new/idtgloballogo.svg',
     overall: 2,
     link: 'https://idtglobal.com',
-    reviews: [],
   },
   {
     name: 'Idt Express',
@@ -31,7 +28,6 @@ const productsMockData = [
     img: 'https://cdn.bossrevolution.com/cms-content/idt_net/images/new/idtexpresslogo.svg',
     overall: 3,
     link: 'https://idtexpress.com',
-    reviews: [],
   },
 ]
 

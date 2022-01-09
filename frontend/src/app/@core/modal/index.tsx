@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import { useForm, NestedValue } from 'react-hook-form'
 import { Rating } from 'react-simple-star-rating'
 // eslint-disable-next-line
-import { IReview } from 'utils/types/dashboard'
+import { IProduct, IReview } from 'utils/types/dashboard'
+import useProducts from 'app/hooks/useProducts'
 
 interface ICustomModalProps {
   productId: string
@@ -12,14 +13,23 @@ interface ICustomModalProps {
   addReview: (review: IReview) => void
 }
 
+const defaultReview = { 
+  productId: '', 
+  reviewer: '', 
+  content: '', 
+  rating: 0 
+}
+
 const CustomModal: React.FC<ICustomModalProps> = (props: ICustomModalProps) => {
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<IReview>({
-    defaultValues: { productId: '', reviewer: '', content: '', rating: 0 },
+    defaultValues: defaultReview,
   })
+  const { products } = useProducts()
 
   const { modalOpen, toggleReviewModal, productId, addReview } = props
   const [reviewerName, setReviewerName] = useState('')
   const [reviewerContent, setReviewerContent] = useState('')
+  const [currentProduct, setCurrentProduct] = useState<IProduct>(products[0])
 
   const [rating, setRating] = React.useState(0)
   
@@ -47,6 +57,14 @@ const CustomModal: React.FC<ICustomModalProps> = (props: ICustomModalProps) => {
     },
   }
 
+  useEffect(() => {
+    const results = products.filter((product: IProduct) => {
+      return product._id === productId
+    })
+    console.log(results)
+    setCurrentProduct(results[0])
+  }, [setCurrentProduct, productId])
+
   return (
     <Modal
       className='custom-modal'
@@ -56,15 +74,13 @@ const CustomModal: React.FC<ICustomModalProps> = (props: ICustomModalProps) => {
       <div className='custom-modal__container'>
         <div className='custom-modal__product-info'>
           <div className='product-info__img'>
-            {/* eslint-disable-next-line */}
-            <img src='https://cdn.bossrevolution.com/cms-content/idt_net/images/new/bossrevolutionlogo.svg' alt='Product Image' />
+            <img src={currentProduct && currentProduct.img} alt='Product Image' />
           </div>
           <div className='product-info__name'>
-            <h3>Boss Revolution</h3>
+            <h3>{currentProduct && currentProduct.name}</h3>
           </div>
           <div className='product-info__description'>
-            {/* eslint-disable-next-line */}
-            <p>Enjoy cheap calls to more than 200 countries and send international mobile top-ups to your friends and family back home.</p>
+            <p>{currentProduct && currentProduct.description}</p>
           </div>
         </div>
         <div className='custom-modal__product-review'>

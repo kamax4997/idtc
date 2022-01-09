@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { ReviewSchema, ReviewDocument } from './review';
 
 mongoose.Promise = global.Promise;
 
@@ -9,7 +8,6 @@ export type ProductDocument = mongoose.Document & {
   img?: string;
   overall: number;
   link?: string;
-  reviews: ReviewDocument[];
 }
 
 export const ProductSchema = new mongoose.Schema({
@@ -18,7 +16,6 @@ export const ProductSchema = new mongoose.Schema({
   img: { type: String, required: true },
   overall: { type: Number, required: true },
   link: { type: String },
-  reviews: [ReviewSchema]
 });
 
 export const Product = mongoose.model<ProductDocument>('Product', ProductSchema);
