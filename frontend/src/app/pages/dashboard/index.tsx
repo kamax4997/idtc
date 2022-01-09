@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react'
-// import { useDispatch } from 'react-redux'
 import Product from 'app/components/product'
 // eslint-disable-next-line
 import { IProduct } from 'utils/types/dashboard'
