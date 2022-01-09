@@ -68,13 +68,6 @@ const connectDB = () => {
       // Destroys all data from a collection
       await productCollection.drop();
       await reviewCollection.drop();
-      
-      // Insert Mock Data
-      // productCollection.insertMany(productsMockData).then((results) => {
-      //   if (results.insertedCount > 0) {
-      //     console.log("Seeding products done!");
-      //   }
-      // })
 
       await productCollection.insertMany(productsMockData);
 
