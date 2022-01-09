@@ -8,11 +8,11 @@ import { check, validationResult } from 'express-validator';
 
 export default {
   addReview: asyncHandler(async (req: Request, res: Response) => {
-    if (!isValidObjectId(req.params.productId))
-      throw new ErrorStatus('Product Not Found!');
+    if (!isValidObjectId(req.body.productId))
+      throw new ErrorStatus('Invalid Product Id!');
       
     let product: ProductDocument = await Product.findById(
-      req.params.productId
+      req.body.productId
     );
 
     if (!product) {
@@ -30,19 +30,28 @@ export default {
         .status(HttpStatus.BAD_REQUEST)
         .json({ error: true, message: errors.array()[0].msg });
 
-    const { rating, comment } = req.body;
-    product.reviews.push(
-      new Review({
-        reviewer: req.params.reviewer,
-        content: req.params.content,
-        rating: req.params.rating,
-      })
-    );
-    await product.save();
-    product = await Product.populate(product, {
-      path: 'reviews.ratedBy',
-      select: 'name',
+    // const { productId, reviewer, content, rating } = req.body;
+    const review = new Review({
+      ...req.body,
     });
-    res.status(200).json(product);
+
+    // Add custom property
+    // review.productId = req.body.productId;
+
+    // product.reviews.push(
+    //   new Review({
+    //     productId,
+    //     reviewer,
+    //     content,
+    //     rating
+    //   })
+    // );
+    await review.save();
+    // await product.save();
+    // product = await Product.populate(product, {
+    //   path: 'reviews.ratedBy',
+    //   select: 'name',
+    // });
+    res.status(200).json(review);
   }),
 };

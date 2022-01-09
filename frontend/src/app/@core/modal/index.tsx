@@ -18,7 +18,6 @@ const CustomModal: React.FC<ICustomModalProps> = (props: ICustomModalProps) => {
   })
 
   const { modalOpen, toggleReviewModal, productId, addReview } = props
-  console.log("f", productId)
   const [reviewerName, setReviewerName] = useState('')
   const [reviewerContent, setReviewerContent] = useState('')
 
@@ -31,7 +30,6 @@ const CustomModal: React.FC<ICustomModalProps> = (props: ICustomModalProps) => {
   const onSubmit = handleSubmit((data) => {
     data.productId = productId
     data.rating = rating / 20
-    console.log(data)
     addReview(data)
   })
 

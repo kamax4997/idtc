@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-hot-toast'
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -28,7 +29,7 @@ axiosInstance.interceptors.request.use(
 // Response interceptor for API calls
 axiosInstance.interceptors.response.use(
   (response: any) => {
-    if (response.status === 200 || response.status === 202 || response.status === 201) {
+    if (response.status === 200 || response.status === 201) {
       if (response.data.code === 200) {
         return Promise.resolve(response.data)
       } else {
@@ -44,6 +45,8 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true
       return axiosInstance(originalRequest)
     }
+    
+    toast.error(error.response.data.message)
     return Promise.reject(error)
   }
 )

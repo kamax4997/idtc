@@ -12,7 +12,7 @@ export type ProductDocument = mongoose.Document & {
   reviews: ReviewDocument[];
 }
 
-const ProductSchema = new mongoose.Schema({
+export const ProductSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
   img: { type: String, required: true },
