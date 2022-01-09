@@ -4,7 +4,6 @@ import { IRootState } from 'utils/redux/store'
 // eslint-disable-next-line
 import { IProduct } from 'utils/types/dashboard'
 
-// eslint-disable-next-line
 const useProducts = () => {
   const dispatch = useDispatch()
 
