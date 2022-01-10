@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
 
   const addReview = (review: IReview) => {
     setTimeout(async () => {
-      const response = await axios.post('/api/v1/reviews', review)
+      const response = await axios.post('/api/v1/reviews/', review)
       
       if (response.data) {
         setProducts(response.data)
@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
     setIsLoading(true)
     async function getProducts() {
       try {
-        const response = await axios.get('/api/v1/products')
+        const response = await axios.get('/api/v1/products/')
         setProducts(response.data.products)
         setProductsAction(response.data.products)
         setIsLoading(false)
